@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                // Используйте скрипт для компиляции всех файлов
+                // Компиляция всех файлов .java в папке src/main/java
                 bat '''
                 for %%f in (src/main/java/*.java) do (
                     javac -d build/classes %%f
@@ -20,8 +20,10 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Пример запуска тестов (если тесты написаны на JUnit)
-                bat 'java -cp build/classes org.junit.runner.JUnitCore TestClass'
+                // Запуск тестов с JUnit
+                bat '''
+                java -cp build/classes;path/to/junit-4.13.2.jar;path/to/hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestClass
+                '''
             }
             post {
                 success {
