@@ -27,7 +27,7 @@ pipeline {
         stage('Collect Test Results') {
             steps {
                 echo 'Collecting test results...'
-                junit 'build/test-results/test/*.xml' // Укажите путь к результатам тестов
+                junit 'build/test-results/test/*.xml'
             }
         }
         stage('Deploy') {
