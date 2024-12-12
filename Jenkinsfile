@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-        jdk 'JDK17'
-    }
+
     stages {
         stage('Build') {
             steps {
@@ -36,7 +34,7 @@ pipeline {
             }
         }
     }
-   post {
+    post {
         always {
             echo 'Pipeline finished.'
         }
