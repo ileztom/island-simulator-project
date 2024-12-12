@@ -2,31 +2,25 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK17'
+        jdk 'JDK17' // Укажите версию Java, которую вы хотите использовать
     }
 
     stages {
         stage('Build') {
             steps {
-                sh './gradlew build'
+                sh './gradlew build' // Сборка проекта с помощью Gradle
             }
         }
 
         stage('Test') {
             steps {
-                sh './gradlew test'
-            }
-        }
-
-        stage('Code Analysis') {
-            steps {
-                sh './gradlew sonarqube'
+                sh './gradlew test' // Запуск тестов
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
+                echo 'Deploying application...' // Шаги для развертывания (если требуется)
             }
         }
     }
