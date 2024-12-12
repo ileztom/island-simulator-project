@@ -1,35 +1,21 @@
 pipeline {
     agent any
-
-    // Инструменты, которые будут использоваться
     tools {
-        jdk 'JDK17' // Укажите версию JDK, которую вы настроили в Jenkins
+        jdk 'JDK17'
     }
-
-    // Переменные окружения
-    environment {
-        // Пример переменных окружения (если требуется)
-        GRADLE_HOME = tool 'Gradle' // Укажите путь к Gradle, если используется
-    }
-
-    // Этапы конвейера
     stages {
-        // Этап 1: Сборка проекта
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                sh './gradlew clean build' // Команда для сборки проекта с помощью Gradle
+                sh './gradlew clean build'
             }
         }
-
-        // Этап 2: Запуск тестов
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh './gradlew test' // Команда для запуска тестов
+                sh './gradlew test'
             }
             post {
-                // Пост-действия после тестов
                 success {
                     echo 'All tests passed!'
                 }
@@ -38,19 +24,19 @@ pipeline {
                 }
             }
         }
-
-        // Этап 3: Развертывание (опционально)
+        stage('Collect Test Results') {
+            steps {
+                echo 'Collecting test results...'
+                junit 'build/test-results/test/*.xml' // Укажите путь к результатам тестов
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                // Здесь можно добавить команды для развертывания
-                // Например, sh './deploy.sh'
             }
         }
     }
-
-    // Пост-действия после выполнения всех этапов
-    post {
+   post {
         always {
             echo 'Pipeline finished.'
         }
