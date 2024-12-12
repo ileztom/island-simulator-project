@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    // tools {
-    //     jdk 'JDK17'
-    // }
+    tools {
+        jdk 'JDK17'
+    }
 
     stages {
         stage('Build') {
