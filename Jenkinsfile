@@ -5,13 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                bat './gradlew clean build' // Используйте bat для Windows
+                bat 'gradlew.bat clean build' // Используйте gradlew.bat для Windows
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                bat './gradlew test' // Используйте bat для Windows
+                bat 'gradlew.bat test' // Используйте gradlew.bat для Windows
             }
             post {
                 success {
