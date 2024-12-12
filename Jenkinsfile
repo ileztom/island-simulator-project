@@ -1,19 +1,22 @@
 pipeline {
     agent any
 
+    // tools {
+    //     jdk 'JDK17'
+    // }
+
     stages {
-        stage('Run Application') {
+        stage('Build') {
             steps {
-                echo 'Running the application...'
-                // Пример запуска JAR-файла
-                bat 'java -jar path/to/your-application.jar'
+                echo 'Building the project...'
+                bat 'javac -d build/classes src/main/java/*.java'
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Пример запуска тестов (если тесты уже скомпилированы)
-                bat 'java -cp path/to/test-classes org.junit.runner.JUnitCore TestClass'
+                bat 'javac -d build/test-classes -cp build/classes src/test/java/*.java'
+                bat 'java -cp build/classes;build/test-classes org.junit.runner.JUnitCore TestClass'
             }
             post {
                 success {
@@ -27,15 +30,13 @@ pipeline {
         stage('Collect Test Results') {
             steps {
                 echo 'Collecting test results...'
-                // Если вы используете JUnit, вы можете собирать результаты тестов
                 junit 'build/test-results/*.xml'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                // Пример развертывания (например, копирование файлов)
-                bat 'copy path/to/your-application.jar C:\\path\\to\\deploy'
+                bat 'copy build/classes/*.class C:\\path\\to\\deploy'
             }
         }
     }
