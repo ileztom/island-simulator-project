@@ -1,25 +1,19 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK17' // Укажите версию JDK, если она настроена в Jenkins
-    }
-
     stages {
-        stage('Build') {
+        stage('Run Application') {
             steps {
-                echo 'Building the project...'
-                // Компиляция Java-кода с использованием javac
-                bat 'javac -d build/classes src/main/java/*.java'
+                echo 'Running the application...'
+                // Пример запуска JAR-файла
+                bat 'java -jar path/to/your-application.jar'
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Компиляция тестов
-                bat 'javac -d build/test-classes -cp build/classes src/test/java/*.java'
-                // Запуск тестов с использованием JUnit (если тесты написаны на JUnit)
-                bat 'java -cp build/classes;build/test-classes org.junit.runner.JUnitCore TestClass'
+                // Пример запуска тестов (если тесты уже скомпилированы)
+                bat 'java -cp path/to/test-classes org.junit.runner.JUnitCore TestClass'
             }
             post {
                 success {
@@ -41,7 +35,7 @@ pipeline {
             steps {
                 echo 'Deploying the application...'
                 // Пример развертывания (например, копирование файлов)
-                bat 'copy build/classes/*.class C:\\path\\to\\deploy'
+                bat 'copy path/to/your-application.jar C:\\path\\to\\deploy'
             }
         }
     }
