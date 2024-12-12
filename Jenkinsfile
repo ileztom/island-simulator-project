@@ -22,7 +22,7 @@ pipeline {
                 echo 'Running tests...'
                 // Запуск тестов с JUnit
                 bat '''
-                java -cp build/classes;path/to/junit-4.13.2.jar;path/to/hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestClass
+                java -cp build/classes;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestClass
                 '''
             }
             post {
