@@ -9,21 +9,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                // Компиляция всех файлов .java в папке src/main/java
-                bat '''
-                for %%f in (src/main/java/*.java) do (
-                    javac -d build/classes %%f
-                )
-                '''
+                // Используйте Gradle Wrapper для сборки
+                bat './gradlew clean build'
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Запуск тестов с JUnit
-                bat '''
-                java -cp build/classes;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestClass
-                '''
+                // Используйте Gradle Wrapper для запуска тестов
+                bat './gradlew test'
             }
             post {
                 success {
@@ -37,14 +31,15 @@ pipeline {
         stage('Collect Test Results') {
             steps {
                 echo 'Collecting test results...'
-                junit 'build/test-results/*.xml'
+                // Собирайте результаты тестов в формате JUnit XML
+                junit 'build/test-results/test/*.xml'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                // Пример развертывания
-                bat 'copy build/classes/*.class C:\\path\\to\\deploy'
+                // Пример развертывания (например, копирование файлов)
+                bat 'copy build/libs/*.jar C:\\path\\to\\deploy'
             }
         }
     }
