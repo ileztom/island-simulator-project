@@ -1,36 +1,10 @@
 pipeline {
-    agent any
-
-    tools {
-        jdk 'JDK17' // Укажите версию Java, которую вы хотите использовать
-    }
-
+    agent { docker { image 'maven:3.9.9-eclipse-temurin-21-alpine' } }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh './gradlew build' // Сборка проекта с помощью Gradle
+                sh 'mvn --version'
             }
-        }
-
-        stage('Test') {
-            steps {
-                sh './gradlew test' // Запуск тестов
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...' // Шаги для развертывания (если требуется)
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build succeeded!'
-        }
-        failure {
-            echo 'Build failed!'
         }
     }
 }
