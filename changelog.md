@@ -2,20 +2,20 @@
 
 ## [1.0.0] - 2025-01-31
 ### Added
-- Initial commit
+- Описание новой функции или изменения.
 
 ### Changed
-- Initial commit
+- Описание изменений в существующих функциях.
 
 ### Fixed
-- Initial commit
+- Описание исправленных ошибок.
 
 ## [0.9.0] - 2025-01-25
 ### Added
-- Feature X
+- Описание новой функции.
 
 ### Changed
-- Updated documentation
+- Обновление документации.
 
 ### Fixed
-- Fixed bug in feature Y
+- Исправление ошибки в функции X.
