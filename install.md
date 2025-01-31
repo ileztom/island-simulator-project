@@ -1,10 +1,10 @@
 # Installation Guide
 
 ## Prerequisites
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- Java 8 or higher
+- Maven
 
 ## Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
+   git clone https://github.com/ileztom/island-simulator-project
